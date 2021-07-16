@@ -1,12 +1,12 @@
 package algorithm;
 import java.util.ArrayList;
-import java.util.Arrays; //配列を表示させるやつ
 import java.util.List;
-import java.util.Scanner;
+
 public class Numeron {
 	private int numeronNumber[];
 	private List<Integer> answerNumber = new ArrayList<>();
 	private RandomNumber randomNumber = new RandomNumber();
+	private NumericRender in = new NumericRender();
 	
 	Numeron() {
 		numeronNumber = randomNumber.generate();
@@ -20,9 +20,13 @@ public class Numeron {
 	
 	private void input() {
 		answerNumber.clear();
-		Scanner in = new Scanner(System.in);
-		answer(in.nextInt());
-		in.close();
+		for(int i = 1; i < 4; i++) {
+			try {
+				answer(in.intRead());
+			} catch(Exception e) {
+				System.err.println("半角数字を入力して下さい");
+			}
+		}
 	}
 	
 	private void jsonConversion(int number) {
@@ -56,7 +60,6 @@ public class Numeron {
 			System.exit(0);
 		}
 		System.out.printf(eat + "eat" + "," + bite + "bite");
-		System.out.printf(Arrays.toString(numeronNumber));
 		input();
 	}
 }
