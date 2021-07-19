@@ -1,6 +1,5 @@
 package algorithm;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Numeron {
@@ -76,8 +75,6 @@ public class Numeron {
 			System.exit(0);
 		}
 		System.out.printf(eat + "eat" + "," + bite + "bite");
-		System.out.printf(Arrays.toString(numeronNumber));
-		System.out.println(answerNumber);
 		input();
 	}
 }
