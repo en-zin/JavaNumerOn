@@ -1,25 +1,25 @@
 package algorithm;
-import java.util.Random;
+
 public class RandomNumber {
-	private int number[];
-	private Random random = new Random();
-	RandomNumber() {
-		number = new int[4];
-	}
+
 	
 
 	public int[] generate() {
-		for(int i = 0; i < 4; i++) {
-			Loop: while(true){
-				number[i] = random.nextInt(10);			
-		            for(int j = 0; j < i; j++){
-		                //その前までの数値のどれかとかぶっていたら数値代入からやり直し
-		                if(number[j] == number[i]) continue Loop;
-		            }
-		            break;
-		        }
+		int	number[] = {0,1,2,3,4,5,6,7,8,9};
+		int numeronNumber[] = new int[4];
+		
+		for(int i = 0; i < number.length; i++) {
+			int shuffle = (int)(Math.random() * (double)number.length);
+			int set = number[i];
+			number[i] = number[shuffle];
+			number[shuffle] = set;
 		}
-		return number;
+		
+		for(int i = 0; i < numeronNumber.length; i++) {
+			numeronNumber[i] = number[i];
+		}
+		
+		return numeronNumber;
 	}
 	
 	

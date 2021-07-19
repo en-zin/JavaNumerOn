@@ -1,5 +1,6 @@
 package algorithm;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Numeron {
@@ -20,31 +21,46 @@ public class Numeron {
 	
 	private void input() {
 		answerNumber.clear();
-		for(int i = 1; i < 4; i++) {
-			try {
-				answer(in.intRead());
-			} catch(Exception e) {
-				System.err.println("半角数字を入力して下さい");
-			}
+		do{
+	        if(in.hasNextInt()){
+	        	answer(in.nextInt());
+	        	break;
+	        }else{
+	        	in.nextLine();
+	            System.err.println("半角数字を入力して下さい");
+	        }
+	    }while(true);
+	}
+	
+	private void check(int answer) {
+		int answerLength = String.valueOf(answer).length();
+		if(answerLength < 4 || answerLength > 4) {
+			System.err.println("4桁の数字を入力して下さい");
+			input();
 		}
 	}
 	
 	private void jsonConversion(int number) {
+		//先頭の数字が0だと0を処理してもらえずエラーをはく
 		while(number > 0) {
 			answerNumber.add(0,number % 10);
 			number /= 10;
 		}
+		if(answerNumber.size() == 3) {
+			answerNumber.add(0,0);
+		}
 	}
 	
 	public void answer(int answer) {
+		check(answer);
 		jsonConversion(answer);
 		int eat = 0;
 		int bite = 0;
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < numeronNumber.length; i++) {
 			if(numeronNumber[i] == answerNumber.get(i)) {
 				eat++;
 			}else {
-				for(int j = 0; j < 4; j ++) {
+				for(int j = 0; j < numeronNumber.length; j++) {
 					if(numeronNumber[i] == answerNumber.get(j)) {
 						bite++;
 					}
@@ -60,6 +76,8 @@ public class Numeron {
 			System.exit(0);
 		}
 		System.out.printf(eat + "eat" + "," + bite + "bite");
+		System.out.printf(Arrays.toString(numeronNumber));
+		System.out.println(answerNumber);
 		input();
 	}
 }
